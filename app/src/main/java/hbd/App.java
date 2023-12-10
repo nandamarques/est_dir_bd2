@@ -55,6 +55,10 @@ public class App {
             updateNomeDisciplina("História","Geografia");
             updateDataMatricula( LocalDate.of(2023, 03, 01),1L);
             listarAlunos();
+            System.out.println();
+            listarDisciplinas();
+            System.out.println();
+            listarMatriculas();
         } catch (Exception e){
             StandardServiceRegistryBuilder.destroy(registry);
             e.printStackTrace();
