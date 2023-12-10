@@ -50,6 +50,10 @@ public class App {
 
             System.out.println("Operação de Update");
             updateNomeAluno("João Silva", "Ana Silva");
+            updateCidadeNatal("Aracaju", "Mariana Costa");
+            updateDataNascimento(LocalDate.of(1998, 06, 22),"Pedro");
+            updateNomeDisciplina("História","Geografia");
+            updateDataMatricula( LocalDate.of(2023, 03, 01),1L);
             listarAlunos();
         } catch (Exception e){
             StandardServiceRegistryBuilder.destroy(registry);
@@ -145,8 +149,45 @@ public class App {
                     query.setParameter("nomeAntigo", nomeAntigo);
 
                     int linhasAtualizadas = query.executeUpdate();
+                });      
+    }
+    public static void updateCidadeNatal(String novaCidade,String nomeAluno) {
+        sessionFactory.inTransaction(session -> {
+            System.out.println("Modificando a cidade do aluno(a): " + nomeAluno + " para: " + novaCidade);
+                    Query query = session.createQuery("UPDATE Aluno al SET al.cidadeNatal = :novaCidade WHERE al.nome = :nomeAluno");
+                    query.setParameter("novaCidade", novaCidade);
+                    query.setParameter("nomeAluno", nomeAluno);
+                    int linhasAtualizadas = query.executeUpdate();
                 });
     }
+       public static void updateDataNascimento(LocalDate novaData ,String nomeAluno) {
+        sessionFactory.inTransaction(session -> {
+            System.out.println("Modificando a data de nascimento do aluno(a): " + nomeAluno + " para: " + novaData);
+                    Query query = session.createQuery("UPDATE Aluno al SET al.dataNascimento = :novaData WHERE al.nome = :nomeAluno");
+                    query.setParameter("novaData", novaData);
+                    query.setParameter("nomeAluno", nomeAluno);
+                    int linhasAtualizadas = query.executeUpdate();
+                });
+    }
+           public static void updateNomeDisciplina(String novoNome ,String nomeAntigo) {
+        sessionFactory.inTransaction(session -> {
+            System.out.println("Modificando o nome da disciplina: " + nomeAntigo + " para: " + novoNome);
+                    Query query = session.createQuery("UPDATE Disciplina dc SET dc.nomeDisciplina = :novoNome WHERE dc.nomeDisciplina = :nomeAntigo");
+                    query.setParameter("novoNome", novoNome);
+                    query.setParameter("nomeAntigo", nomeAntigo);
+                    int linhasAtualizadas = query.executeUpdate();
+                });
+    }
+          public static void updateDataMatricula(LocalDate novaData ,Long id) {
+        sessionFactory.inTransaction(session -> {
+            System.out.println("Modificando a data de matricula de id: " + id + " para: " + novaData);
+                    Query query = session.createQuery("UPDATE Matricula mt SET mt.dataMatricula = :novaData WHERE mt.id = :id");
+                    query.setParameter("novaData", novaData);
+                    query.setParameter("id", id);
+                    int linhasAtualizadas = query.executeUpdate();
+                });
+    }
+   
 
 
 
