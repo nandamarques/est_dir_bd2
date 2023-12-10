@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 public class Matricula {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_matricula")
     private Long id;
 
@@ -66,7 +66,10 @@ public class Matricula {
         this.dataMatricula = dataMatricula;
     }
 
-    public void print() {
-        System.out.println("Aluno: " + this.getAluno() + ", " + "Disciplina: " + this.getDisciplina() + "Data de matrícula: " + this.getDataMatricula());
+    public String toString() {
+        return "Aluno: " + this.getAluno().getId() + ", " +
+                "Disciplina: " + this.getDisciplina().getId() + ", " +
+                "Data de matrícula: " + this.getDataMatricula();
     }
+
 }

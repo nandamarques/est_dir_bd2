@@ -1,13 +1,15 @@
 package hbd.entities;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "alunos")
 public class Aluno {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_aluno")
     private Long id;
     @Column(name = "nome_aluno")
@@ -18,6 +20,8 @@ public class Aluno {
     @Column(name = "cidade_natal")
     private String cidadeNatal;
 
+    @OneToMany(mappedBy = "aluno")
+    private List<Matricula> matriculas;
     public Aluno(){
     }
 

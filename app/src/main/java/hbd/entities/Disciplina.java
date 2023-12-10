@@ -2,13 +2,15 @@ package hbd.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "disciplinas")
 public class Disciplina {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_disciplina")
     private Long id;
 
@@ -16,6 +18,8 @@ public class Disciplina {
     private String nomeDisciplina;
 
 
+    @OneToMany(mappedBy = "disciplina")
+    private List<Matricula> matriculas;
     public Disciplina() {
 
     }
